@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LibraryManager {
 
-    private Map<Integer,Book> inventory = new HashMap<Integer, Book>();
+    private static  Map<Integer,Book> inventory = new HashMap<Integer, Book>();
     private Map<Integer,Customer> reservations = new HashMap<Integer, Customer>();
     private static int counterCallId = 0;
 
@@ -17,7 +17,8 @@ public class LibraryManager {
 
     public void viewInventory () {
         for(Map.Entry<Integer,Book> entry : inventory.entrySet()){
-            System.out.print(entry.getKey() +" : "+ entry.getValue());
+            System.out.print("Call Number: " +entry.getKey() +"\n"+ "ISBN: "+entry.getValue().getIsbn()
+            +"\nTitle: "+entry.getValue().getTitle()+"\nAuthor: "+entry.getValue().getAuthor()+"\n");
         }
     }
 
