@@ -1,12 +1,6 @@
     package com.twu28.biblioteca;
     import java.util.Scanner;
 
-    /**
-     * Created with IntelliJ IDEA.
-     * User: sannidhi
-     * Date: 9/15/12
-     **/
-
     public class Console {
 
         final String INVALID_OPTION_MESSAGE = "Select a valid option!!";
@@ -21,7 +15,7 @@
             return message;
         }
 
-        public int readOption() {
+        public int readInput() {
             while(true){
             try{
                 return scanner.nextInt();

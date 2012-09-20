@@ -2,6 +2,10 @@ package com.twu28.biblioteca;
 
 public class Book {
 
+    private String title;
+    private String author;
+    private String isbn;
+
     public String getIsbn() {
         return isbn;
     }
@@ -26,9 +30,14 @@ public class Book {
         this.author = author;
     }
 
-    private String isbn;
-    private String title;
-    private String author;
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", isbn='" + isbn + '\'' +
+                '}';
+    }
 }
 
 
