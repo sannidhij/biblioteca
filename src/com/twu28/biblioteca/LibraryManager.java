@@ -5,8 +5,22 @@ import java.util.Map;
 
 public class LibraryManager {
 
-    private static Inventory inventory;
+    private static LibraryManager instance;
     private static int callId = 0;
+    private Inventory inventory;
+    private Console console;
+
+    private LibraryManager(Console console) {
+        this.inventory = new Inventory();
+        this.console = console;
+    }
+
+    public static LibraryManager getInstance(Console console) {
+        if (instance == null) {
+            instance = new LibraryManager(console);
+        }
+        return instance;
+    }
 
     public Integer addBook (Book book) {
         callId++;
@@ -14,15 +28,10 @@ public class LibraryManager {
         return callId;
     }
 
-    public static Inventory getInventory() {
-        return inventory;
-    }
-
-    public void viewInventory () {
-//        for(Map.Entry<Integer,Book> entry : inventory.entrySet()){
-//            System.out.print("Call Number: " +entry.getKey() +"\n"+ "ISBN: "+entry.getValue().getIsbn()
-//            +"\nTitle: "+entry.getValue().getTitle()+"\nAuthor: "+entry.getValue().getAuthor()+"\n");
-//        }
+    public void getInventory() {
+        for (Map.Entry<Integer, BookRecord> record: inventory.inventory.entrySet()) {
+            console.printMessage(record.toString() + "\n");
+        }
     }
 
 //    public String issueBook (Integer callId, Customer c) {

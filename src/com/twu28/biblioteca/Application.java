@@ -15,7 +15,7 @@ public class Application{
         menu.printMenu();
 
 
-        LibraryManager libraryManager = new LibraryManager();
+        //LibraryManager libraryManager = new LibraryManager();
         /*
         Book b = new Book();
         b.setIsbn("1");
@@ -28,7 +28,7 @@ public class Application{
         c.name = "me";
         */
         int option = console.readInput();
-        RequestHandler.handle(option);
+        RequestHandler.handle(console, option);
 
 
     }

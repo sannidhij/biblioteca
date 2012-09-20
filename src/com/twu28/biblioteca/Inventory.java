@@ -7,23 +7,18 @@ import java.util.Map;
 
 public class Inventory {
 
-    class BookRecord {
-        int callNo;
-        String isbn;
-        boolean isAvailable;
-
-        BookRecord(int callNo, String isbn) {
-            this.callNo = callNo;
-            this.isbn = isbn;
-            this.isAvailable = true;
-        }
+    HashMap<Integer, BookRecord> inventory;
+    public Inventory() {
+        this.inventory = new HashMap<Integer, BookRecord>();
+        this.addBook(1, new Book("Harry Potter and the Deathly Hallows", "JK Rowling", "1"));
+        this.addBook(2, new Book("Harry Potter and the Deathly Hallows", "JK Rowling", "1"));
+        this.addBook(3, new Book("Lord of the Rings", "JRR Tolkien", "2"));
+        this.addBook(4, new Book("Kite Runner", "Khaled Hosseini", "3"));
     }
-
-    HashMap<Integer, BookRecord> inventory = new HashMap<Integer, BookRecord>();
 
     public boolean addBook(int callNo, Book book) {
         try {
-            BookRecord record = new BookRecord(callNo, book.getIsbn());
+            BookRecord record = new BookRecord(callNo, book);
             inventory.put(record.callNo, record);
         } catch (Exception err) {
             return false;
@@ -51,5 +46,9 @@ public class Inventory {
         }
         return sb.toString();
 
+    }
+
+    public BookRecord getRecord (int callNumber){
+        return inventory.get(callNumber);
     }
 }

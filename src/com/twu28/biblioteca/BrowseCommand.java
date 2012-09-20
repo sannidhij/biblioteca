@@ -10,12 +10,10 @@ public class BrowseCommand implements ICommand {
 
     }
 
-    public void execute() {
+    public void execute(Console console) {
 
-        LibraryManager libraryManager = new LibraryManager();
-        Inventory bookInventory = LibraryManager.getInventory();
-        String list = bookInventory.browseInventory();
-
+        LibraryManager libraryManager = LibraryManager.getInstance(console);
+        libraryManager.getInventory();
     }
 
 

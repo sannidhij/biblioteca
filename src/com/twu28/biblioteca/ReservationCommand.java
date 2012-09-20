@@ -7,8 +7,8 @@ public class ReservationCommand implements ICommand {
     private Book book;
     private Customer customer;
     private Console console;
-    private HashMap<Integer,Book> inventory;
-    private HashMap<Integer,Book> reservation;
+    private Inventory inventory;
+    private Reservation reservation;
 
 
     private String ENTER_CALL_NUMBER = "Please enter the call number of the book/movie you wish to reserve";
@@ -16,28 +16,31 @@ public class ReservationCommand implements ICommand {
     public ReservationCommand() {
     }
 
-    public ReservationCommand(Customer customer, HashMap<Integer,Book> inventory, Console console, HashMap reservation) {
+    public ReservationCommand(Customer customer, Inventory inventory, Console console, Reservation reservation) {
         this.customer = customer;
         this.inventory = inventory;
         this.console = console;
         this.reservation = reservation;
     }
 
-    public void execute() {
-
+    public void execute(Console console) {
+        LibraryManager libraryManager = LibraryManager.getInstance(console);
+        libraryManager.getInventory();
         console.printMessage(ENTER_CALL_NUMBER);
 
         int callNumber = console.readInput();
-        if(inventory.get(callNumber)== null)
-            System.out.print("Sorry we don't have that book yet.");
+        BookRecord record = inventory.getRecord(callNumber);
+        if(record == null)
+            console.printMessage("Sorry we don't have that book yet.");
+        else if (record.isAvailable == false) {
+            console.printMessage("This book is currently not available.");
+        }
         else {
-            reservation.put(callNumber,book);
-            System.out.println("Thank You! Enjoy the book.");
+              //console.readInput();
+              System.out.println("Thank You! Enjoy the book.");
+
+            }
 
         }
-
-
-
-
     }
-}
+
