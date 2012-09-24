@@ -1,46 +1,49 @@
 package com.twu28.biblioteca;
 
-import java.util.HashMap;
-
 public class ReservationCommand implements ICommand {
 
     private Book book;
     private Customer customer;
     private Console console;
-    private Inventory inventory;
+    private Inventory inventory = new Inventory();
     private Reservation reservation;
 
 
-    private String ENTER_CALL_NUMBER = "Please enter the call number of the book/movie you wish to reserve";
+    private String ENTER_ISBN = "Please enter the ISBN number of the book/movie you wish to reserve\n";
 
     public ReservationCommand() {
     }
 
-    public ReservationCommand(Customer customer, Inventory inventory, Console console, Reservation reservation) {
-        this.customer = customer;
+    public ReservationCommand(Inventory inventory, Console console) {
         this.inventory = inventory;
         this.console = console;
-        this.reservation = reservation;
     }
 
     public void execute(Console console) {
         LibraryManager libraryManager = LibraryManager.getInstance(console);
         libraryManager.getInventory();
-        console.printMessage(ENTER_CALL_NUMBER);
+        console.printMessage(ENTER_ISBN);
 
-        int callNumber = console.readInput();
-        BookRecord record = inventory.getRecord(callNumber);
-        if(record == null)
-            console.printMessage("Sorry we don't have that book yet.");
-        else if (record.isAvailable == false) {
-            console.printMessage("This book is currently not available.");
-        }
-        else {
-              //console.readInput();
-              System.out.println("Thank You! Enjoy the book.");
+        int isbn = console.readInteger();
 
-            }
+        console.printMessage(reserveBook(isbn));
 
-        }
     }
+
+    public String reserveBook(int isbn) {
+
+        String CONSOLE_MESSAGE = "";
+        Book book = inventory.getBook(isbn);
+
+        if (book == null)
+            CONSOLE_MESSAGE = "Sorry we don't have that book yet.";
+        else if (book.getAvailable() == false) {
+            CONSOLE_MESSAGE = "This book is currently not available.";
+        } else if (book.getAvailable() == true) {
+            book.setAvailable(false);
+            CONSOLE_MESSAGE = "Thank You! Enjoy the book.";
+        }
+        return CONSOLE_MESSAGE;
+    }
+}
 

@@ -4,13 +4,22 @@ public class Book {
 
     private String title;
     private String author;
-    private String isbn;
+    private int isbn;
+    private boolean isAvailable;
 
-    public String getIsbn() {
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public int getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 
@@ -30,18 +39,20 @@ public class Book {
         this.author = author;
     }
 
-    public Book(String title, String author, String isbn) {
+    public Book(String title, String author, int isbn, boolean isAvailable) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        this.isAvailable = isAvailable;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", isbn='" + isbn + '\'' +
+                "title= '" + title + '\'' +
+                ", author= '" + author + '\'' +
+                ", ISBN= " + isbn +
+                ", Available= " + isAvailable +
                 '}';
     }
 }

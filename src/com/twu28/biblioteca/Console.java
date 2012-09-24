@@ -1,30 +1,41 @@
-    package com.twu28.biblioteca;
-    import java.util.Scanner;
+package com.twu28.biblioteca;
 
-    public class Console {
+import java.util.Scanner;
 
-        final String INVALID_OPTION_MESSAGE = "Select a valid option!!";
-        static Scanner scanner;
+public class Console {
 
-        static {
-            scanner = new Scanner(System.in);
-        }
+    final String INVALID_OPTION_MESSAGE = "Select a valid option!!";
+    final String INVALID_STRING_ENTERED = "Enter in the correct format!";
+    static Scanner scanner;
 
-        public String printMessage (String message) {
-            System.out.print(message);
-            return message;
-        }
+    static {
+        scanner = new Scanner(System.in);
+    }
 
-        public int readInput() {
-            while(true){
-            try{
+    public String printMessage(String message) {
+        System.out.print(message);
+        return message;
+    }
+
+    public int readInteger() {
+        while (true) {
+            try {
                 return scanner.nextInt();
-            }
-            catch (Exception e){
+            } catch (Exception InvalidOption) {
                 printMessage(INVALID_OPTION_MESSAGE);
             }
+        }
+    }
+
+    public String readString() {
+        while (true) {
+            try {
+                return scanner.next();
+            } catch (Exception e) {
+                printMessage(INVALID_OPTION_MESSAGE);
             }
         }
-
     }
+
+}
 
