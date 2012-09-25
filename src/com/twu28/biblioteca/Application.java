@@ -11,6 +11,8 @@ public class Application {
         Menu menu = new Menu();
         menu.printMenu();
 
+        System.out.print("TEST BRANCH");
+
         int option = console.readInteger();
 
 
