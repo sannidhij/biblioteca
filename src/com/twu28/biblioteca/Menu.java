@@ -1,13 +1,15 @@
 package com.twu28.biblioteca;
 
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Exception;
+
 
 public class Menu {
 
     public static final String MENU_OPTIONS = "Menu";
+    public static final String INVALID_TYPE_MESSAGE = "Select a valid type!";
 
     public static List<String> menu = new ArrayList<String>();
 
@@ -16,14 +18,19 @@ public class Menu {
         menu.add("Browse");
     }
 
-    public void displayOptions(PrintStream printStream) {
+    public void displayOptions(Console console) {
 
         //for (int i = 0; i<menu.size(); i++)
-        printStream.print(menu.toString());
+        console.print(menu.toString());
     }
 
-    public int selectMenuOption(int optionNumber) {
-        return 1;
-
+    public void selectMenuOption(String input, Console console) {
+        try{
+        int option = Integer.parseInt(input);
+            RequestHandler.handle(console,option);
+        }
+        catch (Exception exception){
+            console.print("Select a valid type!");
+        }
     }
 }
